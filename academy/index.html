@@ -11,42 +11,53 @@
 <link rel="stylesheet" href="../shared.css">
 <style>
 
-/* ══════════════════════════════════════
-   HERO — full-bleed with photo backdrop
-════════════════════════════════════════ */
-.academy-hero {
+/* ─── RESET reveal to always visible — page has too many sections ─── */
+.reveal {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* ─── GLOBAL PAGE TOKENS ─── */
+:root {
+  --pad: 6rem 5vw;
+  --pad-sm: 4rem 5vw;
+}
+
+/* ════════════════════════════
+   HERO
+════════════════════════════ */
+.ac-hero {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   position: relative;
-  overflow: hidden;
   padding: 0 5vw 6rem;
+  overflow: hidden;
 }
-.academy-hero-bg {
+.ac-hero-bg {
   position: absolute;
   inset: 0;
-  z-index: 0;
 }
-.academy-hero-bg img {
+.ac-hero-bg img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 30%;
+  object-position: center 25%;
   display: block;
-  filter: brightness(0.38) grayscale(10%);
+  filter: brightness(0.35) grayscale(10%);
 }
-.academy-hero-bg::after {
+.ac-hero-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--bg) 0%, rgba(10,10,10,0.5) 45%, transparent 100%);
+  background: linear-gradient(to top, #0A0A0A 0%, rgba(10,10,10,0.55) 50%, transparent 100%);
 }
-.academy-hero-content {
+.ac-hero-content {
   position: relative;
   z-index: 2;
-  max-width: 760px;
+  max-width: 720px;
 }
-.academy-hero-eyebrow {
+.ac-eyebrow {
   font-size: 0.62rem;
   font-weight: 600;
   letter-spacing: 0.32em;
@@ -58,140 +69,133 @@
   gap: 0.8rem;
   animation: fadeUp 0.8s ease 0.1s both;
 }
-.academy-hero-eyebrow::before {
+.ac-eyebrow::before {
   content: '';
-  display: block;
-  width: 28px;
-  height: 1px;
+  width: 28px; height: 1px;
   background: var(--gold);
+  display: block;
+  flex-shrink: 0;
 }
-.academy-hero h1 {
+.ac-hero h1 {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: clamp(2.8rem, 6vw, 5.5rem);
-  line-height: 1.05;
+  line-height: 1.06;
   letter-spacing: -0.025em;
   margin-bottom: 1.6rem;
   animation: fadeUp 0.9s ease 0.25s both;
 }
-.academy-hero h1 em {
-  font-style: italic;
-  color: var(--gold);
-}
-.academy-hero-sub {
-  font-size: 0.92rem;
+.ac-hero h1 em { font-style: italic; color: var(--gold); font-weight: 300; }
+.ac-hero-sub {
+  font-size: 0.9rem;
   color: var(--grey);
   line-height: 1.9;
-  max-width: 520px;
+  max-width: 500px;
   margin-bottom: 2.8rem;
   font-weight: 300;
   animation: fadeUp 0.9s ease 0.4s both;
 }
-.academy-hero-btns {
+.ac-hero-btns {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   animation: fadeUp 0.9s ease 0.55s both;
 }
 
-/* ══════════════════════════════════════
-   ABOUT STRIP
-════════════════════════════════════════ */
-.about-strip {
-  padding: 6rem 5vw;
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 5rem;
-  align-items: start;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.about-strip-body h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 2.8vw, 2.6rem);
-  line-height: 1.2;
-  margin-bottom: 1.2rem;
-}
-.about-strip-body p {
-  font-size: 0.9rem;
-  color: var(--grey);
-  line-height: 1.95;
-  max-width: 640px;
-  margin-bottom: 1.2rem;
-}
-.about-strip-body p:last-child { margin-bottom: 0; }
+/* ════════════════════════════
+   SECTION SHARED STYLES
+════════════════════════════ */
+.ac-section { padding: var(--pad); border-bottom: 1px solid var(--border); }
+.ac-section.dark { background: var(--bg2); }
 
-/* ══════════════════════════════════════
-   STATS ROW
-════════════════════════════════════════ */
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid var(--border);
-}
-.stat-item {
-  padding: 3.5rem 2rem;
-  text-align: center;
-  border-right: 1px solid var(--border);
-}
-.stat-item:last-child { border-right: none; }
-.stat-num {
-  font-family: 'DM Sans', sans-serif;
-  font-size: clamp(2.2rem, 3.5vw, 3.5rem);
-  font-weight: 300;
+.ac-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
   color: var(--gold);
-  line-height: 1;
-  margin-bottom: 0.5rem;
   display: block;
+  margin-bottom: 0.9rem;
 }
-.stat-label {
-  font-size: 0.78rem;
-  color: var(--grey);
-  line-height: 1.6;
-}
-
-/* ══════════════════════════════════════
-   BENEFITS
-════════════════════════════════════════ */
-.benefits {
-  padding: 6rem 5vw;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.benefits-header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-  margin-bottom: 4rem;
-}
-.benefits-header h2 {
+.ac-section-h2 {
   font-family: 'DM Sans', sans-serif;
   font-weight: 400;
   font-size: clamp(1.8rem, 3vw, 2.8rem);
   line-height: 1.15;
-  margin-top: 0.8rem;
+  margin-bottom: 1.2rem;
 }
-.benefits-header p {
-  font-size: 0.88rem;
+.ac-section-h2 em { font-style: italic; color: var(--gold); }
+.ac-section-p {
+  font-size: 0.9rem;
   color: var(--grey);
   line-height: 1.9;
-  padding-top: 0.5rem;
+  max-width: 620px;
+  margin-bottom: 1.2rem;
 }
-.benefits-grid {
+
+/* ════════════════════════════
+   ABOUT
+════════════════════════════ */
+.ac-about-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* ════════════════════════════
+   STATS
+════════════════════════════ */
+.ac-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid var(--border);
+}
+.ac-stat {
+  padding: 3.5rem 2rem;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+.ac-stat:last-child { border-right: none; }
+.ac-stat-num {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 0.6rem;
+  display: block;
+}
+.ac-stat-label {
+  font-size: 0.76rem;
+  color: var(--grey);
+  line-height: 1.65;
+}
+
+/* ════════════════════════════
+   BENEFITS
+════════════════════════════ */
+.ac-benefits-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-bottom: 3.5rem;
+}
+.ac-benefits-top .ac-section-p { margin-bottom: 0; }
+.ac-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
 }
-.benefit-card {
+.ac-benefit-card {
   background: var(--bg2);
   padding: 2.5rem 2.2rem;
-  transition: background 0.25s;
   position: relative;
+  transition: background 0.25s;
 }
-.benefit-card::after {
+.ac-benefit-card::after {
   content: '';
   position: absolute;
   bottom: 0; left: 0;
@@ -199,9 +203,9 @@
   background: var(--gold);
   transition: width 0.4s;
 }
-.benefit-card:hover { background: #161616; }
-.benefit-card:hover::after { width: 100%; }
-.benefit-num {
+.ac-benefit-card:hover { background: #161616; }
+.ac-benefit-card:hover::after { width: 100%; }
+.ac-benefit-num {
   font-family: 'DM Sans', sans-serif;
   font-size: 2.8rem;
   font-weight: 700;
@@ -210,7 +214,7 @@
   margin-bottom: 1rem;
   display: block;
 }
-.benefit-card h3 {
+.ac-benefit-card h3 {
   font-family: 'DM Sans', sans-serif;
   font-size: 1rem;
   font-weight: 600;
@@ -218,53 +222,33 @@
   margin-bottom: 0.7rem;
   line-height: 1.35;
 }
-.benefit-card p {
+.ac-benefit-card p {
   font-size: 0.81rem;
   color: var(--grey);
   line-height: 1.8;
 }
 
-/* ══════════════════════════════════════
+/* ════════════════════════════
    MEMBERSHIP PLANS
-════════════════════════════════════════ */
-.membership {
-  padding: 6rem 5vw;
-  border-bottom: 1px solid var(--border);
+════════════════════════════ */
+.ac-plans-intro {
+  margin-bottom: 3rem;
 }
-.membership-header {
-  margin-bottom: 3.5rem;
-}
-.membership-header h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  margin-top: 0.8rem;
-  margin-bottom: 1rem;
-}
-.membership-header p {
-  font-size: 0.88rem;
-  color: var(--grey);
-  line-height: 1.9;
-  max-width: 560px;
-}
-.membership-grid {
+.ac-plans-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
+  margin-bottom: 1.5rem;
 }
-.membership-card {
+.ac-plan {
   background: var(--bg2);
-  padding: 3rem 2.5rem;
+  padding: 2.8rem 2.5rem;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
-.membership-card.featured {
-  background: #14100a;
-}
-.membership-card.featured::before {
-  content: 'Most Popular';
+.ac-plan.featured { background: #14100a; }
+.ac-plan-badge {
   font-size: 0.58rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -273,277 +257,200 @@
   border: 1px solid var(--border);
   padding: 0.25rem 0.65rem;
   display: inline-block;
-  margin-bottom: 1.2rem;
   align-self: flex-start;
+  margin-bottom: 1.2rem;
 }
-.membership-category {
+.ac-plan-name {
   font-family: 'DM Sans', sans-serif;
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 500;
   color: var(--white);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
 }
-.membership-price-block {
-  margin: 1.4rem 0 1.8rem;
-  padding: 1.4rem 0;
+.ac-plan-sub {
+  font-size: 0.78rem;
+  color: var(--grey-dim);
+  margin-bottom: 1.5rem;
+}
+.ac-plan-price-block {
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  padding: 1.4rem 0;
+  margin-bottom: 1.6rem;
 }
-.membership-price {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.8rem;
-  color: var(--grey-dim);
-  letter-spacing: 0.1em;
+.ac-plan-price-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-style: italic;
+  color: var(--grey-dim);
+  margin-bottom: 0.4rem;
+  display: block;
 }
-.membership-price-tba {
+.ac-plan-price {
   font-family: 'DM Sans', sans-serif;
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   font-weight: 300;
   color: var(--gold);
   line-height: 1;
-  margin-top: 0.3rem;
   display: block;
+  margin-bottom: 0.35rem;
 }
-.membership-price-sub {
-  font-size: 0.72rem;
+.ac-plan-price-note {
+  font-size: 0.71rem;
   color: var(--grey-dim);
-  margin-top: 0.3rem;
+  font-style: italic;
   display: block;
 }
-.membership-desc {
+.ac-plan-desc {
   font-size: 0.82rem;
   color: var(--grey);
   line-height: 1.8;
   flex-grow: 1;
   margin-bottom: 2rem;
 }
-.membership-card .btn-primary,
-.membership-card .btn-ghost {
+.ac-plan .btn-primary,
+.ac-plan .btn-ghost {
   text-align: center;
   width: 100%;
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ac-plans-note {
+  font-size: 0.74rem;
+  color: var(--grey-dim);
+  text-align: center;
+  line-height: 1.8;
 }
 
-/* ══════════════════════════════════════
+/* ════════════════════════════
    WHO CAN JOIN
-════════════════════════════════════════ */
-.who-join {
-  padding: 6rem 5vw;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.who-join-inner {
+════════════════════════════ */
+.ac-who-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 7rem;
+  gap: 6rem;
   align-items: start;
 }
-.who-join-text h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  line-height: 1.15;
-  margin-top: 0.8rem;
-  margin-bottom: 1.2rem;
-}
-.who-join-text p {
-  font-size: 0.88rem;
-  color: var(--grey);
-  line-height: 1.9;
-  margin-bottom: 1.5rem;
-}
-.roles-grid {
+.ac-roles-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1px;
   background: var(--border);
 }
-.role-item {
+.ac-role {
   background: var(--bg2);
-  padding: 1rem 1.2rem;
-  font-size: 0.82rem;
+  padding: 0.95rem 1.2rem;
+  font-size: 0.83rem;
   color: var(--grey);
   display: flex;
   align-items: center;
   gap: 0.7rem;
   transition: background 0.2s, color 0.2s;
-  cursor: default;
 }
-.role-item:hover {
-  background: #161616;
-  color: var(--white);
-}
-.role-item::before {
+.ac-role:hover { background: #161616; color: var(--white); }
+.ac-role::before {
   content: '';
-  width: 5px;
-  height: 5px;
+  width: 5px; height: 5px;
   border-radius: 50%;
   background: var(--gold);
   flex-shrink: 0;
 }
+.ac-role.full { grid-column: span 2; }
 
-/* ══════════════════════════════════════
-   UPCOMING MEETINGS — future-ready section
-   Currently shows "Coming Soon" state
-════════════════════════════════════════ */
-.upcoming {
-  padding: 6rem 5vw;
-  border-bottom: 1px solid var(--border);
-}
-.upcoming-header {
+/* ════════════════════════════
+   UPCOMING MEETINGS
+════════════════════════════ */
+.ac-meetings-top {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 3.5rem;
   gap: 2rem;
   flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
-.upcoming-header h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  margin-top: 0.8rem;
-}
-.upcoming-grid {
+.ac-placeholder-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
 }
-.upcoming-card {
+.ac-placeholder-card {
   background: var(--bg2);
-  padding: 2.5rem 2.2rem;
-}
-.upcoming-card-placeholder {
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 200px;
-  gap: 0.8rem;
-  background: var(--bg2);
-  border: 1px dashed rgba(201,169,110,0.2);
-  padding: 2.5rem;
+  gap: 1rem;
+  min-height: 220px;
 }
-.upcoming-card-placeholder .placeholder-icon {
-  width: 40px;
-  height: 40px;
+.ac-placeholder-icon {
+  width: 44px; height: 44px;
   border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  flex-shrink: 0;
 }
-.upcoming-card-placeholder .placeholder-icon svg {
-  width: 16px;
-  height: 16px;
+.ac-placeholder-icon svg {
+  width: 18px; height: 18px;
   fill: none;
   stroke: var(--gold);
   stroke-width: 1.5;
 }
-.upcoming-card-placeholder p {
-  font-size: 0.78rem;
+.ac-placeholder-card p {
+  font-size: 0.8rem;
   color: var(--grey-dim);
-  line-height: 1.7;
-}
-/* When meetings exist, use .meeting-card instead */
-.meeting-date-badge {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  background: var(--gold);
-  color: var(--bg);
-  padding: 0.5rem 0.9rem;
-  margin-bottom: 1.2rem;
-  min-width: 52px;
-}
-.meeting-date-day {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 1;
-}
-.meeting-date-month {
-  font-size: 0.6rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-.meeting-title {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--white);
-  margin-bottom: 0.4rem;
-}
-.meeting-meta {
-  font-size: 0.75rem;
-  color: var(--grey-dim);
-  margin-bottom: 0.8rem;
+  line-height: 1.75;
+  max-width: 240px;
 }
 
-/* ══════════════════════════════════════
-   TESTIMONIALS — future-ready
-════════════════════════════════════════ */
-.academy-testimonials {
-  padding: 6rem 5vw;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.academy-testimonials h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  margin-top: 0.8rem;
-  margin-bottom: 3.5rem;
-}
-.testimonials-placeholder {
+/* ════════════════════════════
+   TESTIMONIALS
+════════════════════════════ */
+.ac-testimonials-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
+  margin-top: 3rem;
 }
-.testimonial-placeholder-card {
+.ac-testimonial-card {
   background: var(--bg2);
   padding: 2.5rem 2.2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 200px;
-  border: 1px dashed rgba(201,169,110,0.15);
+  min-height: 220px;
+  border: 1px dashed rgba(201,169,110,0.18);
 }
-.testimonial-placeholder-card p {
-  font-size: 0.8rem;
+.ac-testimonial-card p {
+  font-size: 0.82rem;
   color: var(--grey-dim);
+  line-height: 1.8;
   font-style: italic;
-  line-height: 1.7;
 }
-.testimonial-placeholder-card .t-author {
+.ac-testimonial-card .ac-t-author {
   font-size: 0.72rem;
   color: var(--grey-dim);
-  margin-top: 1.5rem;
+  margin-top: 1.8rem;
   display: flex;
   align-items: center;
   gap: 0.6rem;
 }
-.testimonial-placeholder-card .t-author::before {
+.ac-testimonial-card .ac-t-author::before {
   content: '';
-  width: 24px;
-  height: 1px;
+  width: 20px; height: 1px;
   background: var(--grey-dim);
 }
 
-/* ══════════════════════════════════════
-   GALLERY — future-ready
-════════════════════════════════════════ */
-.academy-gallery {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.gallery-header {
+/* ════════════════════════════
+   GALLERY
+════════════════════════════ */
+.ac-gallery-header {
   padding: 4rem 5vw 2.5rem;
   display: flex;
   align-items: flex-end;
@@ -552,135 +459,95 @@
   flex-wrap: wrap;
   border-bottom: 1px solid var(--border);
 }
-.gallery-header h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-  margin-top: 0.6rem;
+.ac-gallery-header-note {
+  font-size: 0.74rem;
+  color: var(--grey-dim);
+  font-style: italic;
 }
-.gallery-grid {
+.ac-gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
-.gallery-item {
+.ac-gallery-item {
   aspect-ratio: 1;
   overflow: hidden;
   position: relative;
   background: var(--bg3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
 }
-.gallery-item img {
+.ac-gallery-item img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  filter: grayscale(15%) brightness(0.7);
+  filter: grayscale(15%) brightness(0.68);
   transition: filter 0.4s, transform 0.5s;
 }
-.gallery-item:hover img {
+.ac-gallery-item:hover img {
   filter: grayscale(0%) brightness(0.88);
   transform: scale(1.05);
 }
-.gallery-placeholder-text {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--grey-dim);
-  text-align: center;
-  padding: 1rem;
-}
 
-/* ══════════════════════════════════════
-   RESOURCES — future-ready
-════════════════════════════════════════ */
-.resources {
-  padding: 6rem 5vw;
-  background: var(--bg2);
-  border-bottom: 1px solid var(--border);
-}
-.resources h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
-  margin-top: 0.8rem;
-  margin-bottom: 3.5rem;
-}
-.resources-grid {
+/* ════════════════════════════
+   TRAINING RESOURCES
+════════════════════════════ */
+.ac-resources-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
+  margin-top: 3rem;
 }
-.resource-card {
+.ac-resource-card {
   background: var(--bg2);
-  padding: 2.5rem 2.2rem;
+  padding: 2.2rem 2.2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  border: 1px dashed rgba(201,169,110,0.15);
+  gap: 0.5rem;
+  min-height: 160px;
   transition: background 0.2s;
 }
-.resource-card:hover { background: #161616; }
-.resource-type {
+.ac-resource-card:hover { background: #161616; }
+.ac-resource-type {
   font-size: 0.6rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--gold);
   font-weight: 700;
 }
-.resource-title {
+.ac-resource-title {
   font-family: 'DM Sans', sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
-  color: var(--grey-dim);
+  color: var(--white);
+  line-height: 1.4;
 }
-.resource-coming {
+.ac-resource-note {
   font-size: 0.75rem;
   color: var(--grey-dim);
   font-style: italic;
+  margin-top: auto;
+  padding-top: 0.8rem;
 }
 
-/* ══════════════════════════════════════
-   MEMBER LOGIN / PORTAL — future-ready
-════════════════════════════════════════ */
-.member-portal {
-  padding: 5rem 5vw;
-  border-bottom: 1px solid var(--border);
+/* ════════════════════════════
+   MEMBER PORTAL
+════════════════════════════ */
+.ac-portal-inner {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+  gap: 5rem;
+  align-items: start;
 }
-.portal-text h2 {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-  margin-top: 0.8rem;
-  margin-bottom: 1rem;
-}
-.portal-text p {
-  font-size: 0.88rem;
-  color: var(--grey);
-  line-height: 1.9;
-  margin-bottom: 2rem;
-}
-.portal-box {
+.ac-portal-box {
   background: var(--bg2);
   border: 1px solid var(--border);
   padding: 3rem;
   text-align: center;
   position: relative;
-  overflow: hidden;
 }
-.portal-box::before {
-  content: 'Coming Soon';
+.ac-portal-coming {
   position: absolute;
-  top: 1.2rem;
-  right: 1.2rem;
-  font-size: 0.58rem;
+  top: 1.2rem; right: 1.2rem;
+  font-size: 0.56rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
@@ -688,9 +555,8 @@
   border: 1px solid var(--border);
   padding: 0.22rem 0.55rem;
 }
-.portal-icon {
-  width: 56px;
-  height: 56px;
+.ac-portal-icon {
+  width: 56px; height: 56px;
   border: 1px solid var(--border);
   border-radius: 50%;
   display: flex;
@@ -698,110 +564,116 @@
   justify-content: center;
   margin: 0 auto 1.5rem;
 }
-.portal-icon svg {
-  width: 22px;
-  height: 22px;
+.ac-portal-icon svg {
+  width: 22px; height: 22px;
   fill: none;
   stroke: var(--gold);
   stroke-width: 1.5;
 }
-.portal-box h3 {
+.ac-portal-box h3 {
   font-family: 'DM Sans', sans-serif;
   font-size: 1.1rem;
   font-weight: 500;
   color: var(--white);
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.7rem;
 }
-.portal-box p {
-  font-size: 0.8rem;
+.ac-portal-box p {
+  font-size: 0.82rem;
   color: var(--grey);
-  line-height: 1.75;
-  margin-bottom: 1.8rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
 }
-.portal-box .btn-ghost {
-  opacity: 0.5;
+.ac-portal-box .btn-ghost {
+  opacity: 0.45;
   cursor: not-allowed;
   pointer-events: none;
+  display: inline-block;
 }
 
-/* ══════════════════════════════════════
+/* ════════════════════════════
    FINAL CTA
-════════════════════════════════════════ */
-.academy-cta {
+════════════════════════════ */
+.ac-cta {
   padding: 8rem 5vw;
   text-align: center;
   position: relative;
   overflow: hidden;
+  border-top: 1px solid var(--border);
 }
-.academy-cta::before {
+.ac-cta::before {
   content: 'MMTA';
   position: absolute;
   font-family: 'DM Sans', sans-serif;
   font-size: 22vw;
   font-weight: 700;
   color: rgba(201,169,110,0.025);
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.05em;
   line-height: 1;
 }
-.academy-cta h2 {
+.ac-cta h2 {
   font-family: 'DM Sans', sans-serif;
   font-weight: 300;
   font-size: clamp(2.5rem, 5vw, 5rem);
   line-height: 1.08;
   margin-bottom: 1.2rem;
 }
-.academy-cta h2 em {
-  font-style: italic;
-  color: var(--gold);
-}
-.academy-cta p {
+.ac-cta h2 em { font-style: italic; color: var(--gold); }
+.ac-cta-p {
   font-size: 0.9rem;
   color: var(--grey);
   max-width: 480px;
   margin: 0 auto 2.5rem;
   line-height: 1.85;
 }
-.cta-btns {
+.ac-cta-btns {
   display: flex;
   gap: 1rem;
   justify-content: center;
   flex-wrap: wrap;
+  margin-bottom: 1.5rem;
 }
+.ac-cta-note {
+  font-size: 0.72rem;
+  color: var(--grey-dim);
+  line-height: 1.8;
+}
+.ac-cta-note a { color: var(--gold); text-decoration: none; }
 
-/* ══════════════════════════════════════
+/* ════════════════════════════
    RESPONSIVE
-════════════════════════════════════════ */
-@media(max-width:960px){
-  .about-strip{grid-template-columns:1fr;gap:1.5rem;}
-  .stats-row{grid-template-columns:1fr 1fr;}
-  .stat-item{border-bottom:1px solid var(--border);}
-  .stat-item:nth-child(even){border-right:none;}
-  .benefits-header{grid-template-columns:1fr;}
-  .benefits-grid{grid-template-columns:1fr;}
-  .membership-grid{grid-template-columns:1fr;}
-  .who-join-inner{grid-template-columns:1fr;gap:3rem;}
-  .roles-grid{grid-template-columns:1fr 1fr;}
-  .upcoming-grid{grid-template-columns:1fr;}
-  .testimonials-placeholder{grid-template-columns:1fr;}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);}
-  .resources-grid{grid-template-columns:1fr;}
-  .member-portal{grid-template-columns:1fr;}
+════════════════════════════ */
+@media(max-width: 960px) {
+  .ac-about-inner { grid-template-columns: 1fr; gap: 2rem; }
+  .ac-stats { grid-template-columns: 1fr 1fr; }
+  .ac-stat { border-bottom: 1px solid var(--border); }
+  .ac-stat:nth-child(even) { border-right: none; }
+  .ac-benefits-top { grid-template-columns: 1fr; gap: 1.5rem; }
+  .ac-grid-3 { grid-template-columns: 1fr; }
+  .ac-plans-grid { grid-template-columns: 1fr; }
+  .ac-who-inner { grid-template-columns: 1fr; gap: 3rem; }
+  .ac-placeholder-grid { grid-template-columns: 1fr; }
+  .ac-testimonials-grid { grid-template-columns: 1fr; }
+  .ac-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .ac-resources-grid { grid-template-columns: 1fr 1fr; }
+  .ac-portal-inner { grid-template-columns: 1fr; gap: 3rem; }
 }
-@media(max-width:540px){
-  .stats-row{grid-template-columns:1fr;}
-  .stat-item{border-right:none;}
-  .roles-grid{grid-template-columns:1fr;}
-  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+@media(max-width: 540px) {
+  :root { --pad: 4rem 5vw; }
+  .ac-stats { grid-template-columns: 1fr; }
+  .ac-stat { border-right: none; }
+  .ac-roles-grid { grid-template-columns: 1fr; }
+  .ac-role.full { grid-column: span 1; }
+  .ac-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .ac-resources-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
   <a href="index.html" class="nav-logo">
     <img src="https://i.ibb.co/4Zp67P6r/Mastercraft-Logo-H-white.png" alt="Mastercraft Global Ltd">
@@ -819,377 +691,329 @@
   <div class="nav-hamburger" onclick="toggleMenu(this)"><span></span><span></span><span></span></div>
 </nav>
 
-<!-- ══════════════════════════════════════
-     HERO
-════════════════════════════════════════ -->
-<section class="academy-hero">
-  <div class="academy-hero-bg">
+<!-- ════════════ HERO ════════════ -->
+<section class="ac-hero">
+  <div class="ac-hero-bg">
     <img src="https://i.ibb.co/wFcMb77q/57-jpg.jpg" alt="Mastercraft Music & Theatre Academy">
   </div>
-  <div class="academy-hero-content">
-    <div class="academy-hero-eyebrow">Mastercraft Global Ltd</div>
-    <h1>
-      Music &amp; Theatre<br>
-      <em>Academy.</em>
-    </h1>
-    <p class="academy-hero-sub">
-      A community for individuals passionate about music and theatre — nurturing talent, providing practical training, and building a thriving creative movement that transforms lives.
-    </p>
-    <div class="academy-hero-btns">
+  <div class="ac-hero-content">
+    <div class="ac-eyebrow">Mastercraft Global Ltd</div>
+    <h1>Music &amp; Theatre<br><em>Academy.</em></h1>
+    <p class="ac-hero-sub">A community for individuals passionate about music and theatre — nurturing talent, building skills, and creating a thriving movement that transforms lives.</p>
+    <div class="ac-hero-btns">
       <a href="#join" class="btn-primary">Join the Academy</a>
       <a href="#about" class="btn-ghost">Learn More</a>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     ABOUT
-════════════════════════════════════════ -->
-<section class="about-strip" id="about">
-  <span class="section-label reveal" style="padding-top:0.3rem;">About the Academy</span>
-  <div class="about-strip-body reveal">
-    <h2>Where Talent Meets Purpose</h2>
-    <p>Mastercraft Music &amp; Theatre Academy is a community for individuals passionate about music and theatre. It exists to nurture talent, provide practical training, create opportunities for creative expression, and build a thriving community of creatives who desire to make impact through music and theatre.</p>
-    <p>The Academy meets at least once every month for training, networking, mentorship, rehearsals, and community engagement — bringing together artists at every stage of their journey in a structured, supportive environment.</p>
+<!-- ════════════ ABOUT ════════════ -->
+<section class="ac-section" id="about">
+  <div class="ac-about-inner">
+    <div>
+      <span class="ac-section-label">About the Academy</span>
+      <h2 class="ac-section-h2">Where Talent<br>Meets Purpose</h2>
+    </div>
+    <div>
+      <p class="ac-section-p">Mastercraft Music &amp; Theatre Academy is a community for individuals passionate about music and theatre. It exists to nurture talent, provide practical training, create opportunities for creative expression, and build a thriving community of creatives who desire to make impact through music and theatre.</p>
+      <p class="ac-section-p">The Academy meets at least once every month for training, networking, mentorship, rehearsals, and community engagement — bringing together artists at every stage of their journey in a structured, supportive environment.</p>
+    </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     STATS
-════════════════════════════════════════ -->
-<div class="stats-row">
-  <div class="stat-item reveal">
-    <span class="stat-num">Monthly</span>
-    <div class="stat-label">Academy meetings —<br>training, rehearsals & networking</div>
+<!-- ════════════ STATS ════════════ -->
+<div class="ac-stats">
+  <div class="ac-stat">
+    <span class="ac-stat-num">Monthly</span>
+    <div class="ac-stat-label">Academy meetings —<br>training, rehearsals & networking</div>
   </div>
-  <div class="stat-item reveal">
-    <span class="stat-num">3</span>
-    <div class="stat-label">Membership categories<br>for every stage of life</div>
+  <div class="ac-stat">
+    <span class="ac-stat-num">3</span>
+    <div class="ac-stat-label">Membership categories<br>for every stage of life</div>
   </div>
-  <div class="stat-item reveal">
-    <span class="stat-num">∞</span>
-    <div class="stat-label">Open to all experience levels<br>and areas of specialisation</div>
+  <div class="ac-stat">
+    <span class="ac-stat-num">Open</span>
+    <div class="ac-stat-label">To all experience levels and<br>areas of specialisation</div>
   </div>
-  <div class="stat-item reveal">
-    <span class="stat-num">UK</span>
-    <div class="stat-label">Global Talent Visa support<br>for music & theatre members</div>
+  <div class="ac-stat">
+    <span class="ac-stat-num">UK</span>
+    <div class="ac-stat-label">Global Talent Visa support<br>for music & theatre members</div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     MEMBERSHIP BENEFITS
-════════════════════════════════════════ -->
-<section class="benefits" id="benefits">
-  <div class="benefits-header">
-    <div class="reveal">
-      <span class="section-label" style="margin-bottom:0.8rem;">Membership Benefits</span>
-      <h2>Everything You Get<br>as a Member</h2>
+<!-- ════════════ BENEFITS ════════════ -->
+<section class="ac-section dark" id="benefits">
+  <div class="ac-benefits-top">
+    <div>
+      <span class="ac-section-label">Membership Benefits</span>
+      <h2 class="ac-section-h2">Everything You Get<br>as a Member</h2>
     </div>
-    <p class="reveal">Every Academy member gets access to a rich ecosystem of support, training, and community — designed to help you grow, perform, and leave your mark.</p>
+    <p class="ac-section-p" style="padding-top:0.4rem;margin-bottom:0;">Every Academy member gets access to a rich ecosystem of support, training, and community — designed to help you grow, perform, and leave your mark.</p>
   </div>
-  <div class="benefits-grid">
-    <div class="benefit-card reveal">
-      <span class="benefit-num">01</span>
+  <div class="ac-grid-3">
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">01</span>
       <h3>UK Global Talent Visa Support</h3>
-      <p>Guidance and support towards your UK Global Talent Visa application in the Music &amp; Theatre category — a unique benefit exclusive to Academy members.</p>
+      <p>Support and guidance towards the UK Global Talent Visa application in the Music &amp; Theatre category — a unique benefit exclusive to Academy members.</p>
     </div>
-    <div class="benefit-card reveal">
-      <span class="benefit-num">02</span>
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">02</span>
       <h3>Professional Creative Opportunities</h3>
       <p>Opportunities to develop and utilise your music and theatre skills in a professional setting — performing, producing, directing, and creating at a high level.</p>
     </div>
-    <div class="benefit-card reveal">
-      <span class="benefit-num">03</span>
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">03</span>
       <h3>Life-Transforming Productions</h3>
       <p>Opportunities to participate in productions that transform lives through music and theatre — contributing to creative work that has real impact in communities.</p>
     </div>
-    <div class="benefit-card reveal">
-      <span class="benefit-num">04</span>
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">04</span>
       <h3>Regular Training &amp; Workshops</h3>
-      <p>Structured workshops to sharpen creative and technical skills, including script writing, acting, music performance, theatre production, and much more.</p>
+      <p>Structured workshops to sharpen creative and technical skills — covering script writing, acting, music performance, theatre production, and more.</p>
     </div>
-    <div class="benefit-card reveal">
-      <span class="benefit-num">05</span>
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">05</span>
       <h3>A Thriving Creative Community</h3>
-      <p>A vibrant music and theatre community offering collaboration, mentorship, accountability, networking, and ongoing support at every stage of your creative journey.</p>
+      <p>A vibrant community offering collaboration, mentorship, accountability, networking, and ongoing support at every stage of your creative journey.</p>
     </div>
-    <div class="benefit-card reveal">
-      <span class="benefit-num">06</span>
+    <div class="ac-benefit-card">
+      <span class="ac-benefit-num">06</span>
       <h3>Monthly Academy Meetings</h3>
-      <p>At least one meeting per month covering training, networking, mentorship, rehearsals, and community engagement — keeping you active, connected, and growing.</p>
+      <p>At least one meeting per month covering training, networking, mentorship, rehearsals, and community engagement — keeping you active and connected.</p>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     MEMBERSHIP PLANS
-════════════════════════════════════════ -->
-<section class="membership" id="join">
-  <div class="membership-header reveal">
-    <span class="section-label" style="margin-bottom:0.8rem;">Membership Plans</span>
-    <h2>Choose Your Membership</h2>
-    <p>The Academy operates on a monthly subscription model. Choose the category that fits you — all tiers include full access to Academy meetings, training, community, and UK Global Talent Visa support.</p>
+<!-- ════════════ MEMBERSHIP PLANS ════════════ -->
+<section class="ac-section" id="join">
+  <div class="ac-plans-intro">
+    <span class="ac-section-label">Membership Plans</span>
+    <h2 class="ac-section-h2">Choose Your Membership</h2>
+    <p class="ac-section-p">The Academy operates on a monthly subscription model. All tiers include full access to Academy meetings, training, community, and UK Global Talent Visa support.</p>
   </div>
-  <div class="membership-grid">
+  <div class="ac-plans-grid">
 
     <!-- STUDENT -->
-    <div class="membership-card reveal">
-      <div class="membership-category">Student</div>
-      <p style="font-size:0.8rem;color:var(--grey-dim);margin-top:0.3rem;">Full-time student in education</p>
-      <div class="membership-price-block">
-        <span class="membership-price">Monthly subscription</span>
-        <span class="membership-price-tba">Price TBA</span>
-        <span class="membership-price-sub">Pricing will be confirmed shortly</span>
+    <div class="ac-plan">
+      <div class="ac-plan-name">Student</div>
+      <div class="ac-plan-sub">Full-time student in education</div>
+      <div class="ac-plan-price-block">
+        <span class="ac-plan-price-label">Monthly subscription</span>
+        <span class="ac-plan-price">Price TBA</span>
+        <span class="ac-plan-price-note">Pricing will be confirmed shortly</span>
       </div>
-      <p class="membership-desc">Full access to all Academy meetings, training workshops, community events, mentorship, and UK Global Talent Visa guidance. Designed to support students building their creative foundations.</p>
-      <a href="#" class="btn-ghost" onclick="return false;" style="opacity:0.45;cursor:not-allowed;text-align:center;">Registration Opening Soon</a>
+      <p class="ac-plan-desc">Full access to all Academy meetings, workshops, community events, mentorship, and UK Global Talent Visa guidance. Designed to support students building their creative foundations.</p>
+      <a href="#" class="btn-ghost">Registration Opening Soon</a>
     </div>
 
     <!-- EMPLOYED ADULT -->
-    <div class="membership-card featured reveal">
-      <div class="membership-category">Employed Adult</div>
-      <p style="font-size:0.8rem;color:var(--grey-dim);margin-top:0.3rem;">Working professional</p>
-      <div class="membership-price-block">
-        <span class="membership-price">Monthly subscription</span>
-        <span class="membership-price-tba">Price TBA</span>
-        <span class="membership-price-sub">Pricing will be confirmed shortly</span>
+    <div class="ac-plan featured">
+      <span class="ac-plan-badge">Most Popular</span>
+      <div class="ac-plan-name">Employed Adult</div>
+      <div class="ac-plan-sub">Working professional</div>
+      <div class="ac-plan-price-block">
+        <span class="ac-plan-price-label">Monthly subscription</span>
+        <span class="ac-plan-price">Price TBA</span>
+        <span class="ac-plan-price-note">Pricing will be confirmed shortly</span>
       </div>
-      <p class="membership-desc">Full access to all Academy meetings, training workshops, professional creative opportunities, productions, networking, mentorship, and UK Global Talent Visa guidance. For those building alongside a career.</p>
-      <a href="#" class="btn-primary" onclick="return false;" style="opacity:0.45;cursor:not-allowed;text-align:center;">Registration Opening Soon</a>
+      <p class="ac-plan-desc">Full access to all Academy meetings, workshops, professional creative opportunities, productions, networking, mentorship, and UK Global Talent Visa guidance.</p>
+      <a href="#" class="btn-primary">Registration Opening Soon</a>
     </div>
 
     <!-- UNEMPLOYED ADULT -->
-    <div class="membership-card reveal">
-      <div class="membership-category">Unemployed Adult</div>
-      <p style="font-size:0.8rem;color:var(--grey-dim);margin-top:0.3rem;">Currently not in employment</p>
-      <div class="membership-price-block">
-        <span class="membership-price">Monthly subscription</span>
-        <span class="membership-price-tba">Price TBA</span>
-        <span class="membership-price-sub">Pricing will be confirmed shortly</span>
+    <div class="ac-plan">
+      <div class="ac-plan-name">Unemployed Adult</div>
+      <div class="ac-plan-sub">Currently not in employment</div>
+      <div class="ac-plan-price-block">
+        <span class="ac-plan-price-label">Monthly subscription</span>
+        <span class="ac-plan-price">Price TBA</span>
+        <span class="ac-plan-price-note">Pricing will be confirmed shortly</span>
       </div>
-      <p class="membership-desc">Full access to all Academy meetings, training workshops, community events, mentorship, and UK Global Talent Visa guidance. Accessible pricing for those in a period of transition or job-seeking.</p>
-      <a href="#" class="btn-ghost" onclick="return false;" style="opacity:0.45;cursor:not-allowed;text-align:center;">Registration Opening Soon</a>
+      <p class="ac-plan-desc">Full access to all Academy meetings, workshops, community events, mentorship, and UK Global Talent Visa guidance. Accessible pricing for those in transition.</p>
+      <a href="#" class="btn-ghost">Registration Opening Soon</a>
     </div>
 
   </div>
-
-  <!-- NOTE about future payment portal -->
-  <p style="font-size:0.75rem;color:var(--grey-dim);text-align:center;margin-top:2rem;line-height:1.8;">
-    Pricing and registration links will be added shortly. A payment portal will be integrated for seamless monthly subscription management.
-  </p>
+  <p class="ac-plans-note">Pricing and registration links will be confirmed shortly. A payment portal will be integrated for seamless monthly subscription management. <a href="contact.html" style="color:var(--gold);text-decoration:none;">Contact us</a> to register your interest now.</p>
 </section>
 
-<!-- ══════════════════════════════════════
-     WHO CAN JOIN
-════════════════════════════════════════ -->
-<section class="who-join" id="who">
-  <div class="who-join-inner">
-    <div class="who-join-text reveal">
-      <span class="section-label" style="margin-bottom:0.8rem;">Who Can Join?</span>
-      <h2>The Academy<br>is Open to All</h2>
-      <p>Membership is open to anyone interested in music and theatre production — regardless of experience level or area of specialisation. Whether you are just starting out or a seasoned professional, there is a place for you here.</p>
-      <p>We welcome anyone who desires to contribute to creative work that transforms lives.</p>
-      <div style="margin-top:2rem;">
-        <a href="#join" class="btn-primary">Join the Academy</a>
-      </div>
+<!-- ════════════ WHO CAN JOIN ════════════ -->
+<section class="ac-section dark" id="who">
+  <div class="ac-who-inner">
+    <div>
+      <span class="ac-section-label">Who Can Join?</span>
+      <h2 class="ac-section-h2">The Academy<br>is Open to All</h2>
+      <p class="ac-section-p">Membership is open to anyone interested in music and theatre production — regardless of experience level or area of specialisation. Whether you are just starting out or a seasoned professional, there is a place for you here.</p>
+      <p class="ac-section-p">We welcome anyone who desires to contribute to creative work that transforms lives.</p>
+      <a href="#join" class="btn-primary" style="margin-top:1rem;display:inline-block;">Join the Academy</a>
     </div>
-    <div class="reveal">
-      <div class="roles-grid">
-        <div class="role-item">Actors</div>
-        <div class="role-item">Singers</div>
-        <div class="role-item">Musicians</div>
-        <div class="role-item">Dancers</div>
-        <div class="role-item">Gaffers</div>
-        <div class="role-item">Event Planners</div>
-        <div class="role-item">Graphic Designers</div>
-        <div class="role-item">Production Crew</div>
-        <div class="role-item">Technical Crew</div>
-        <div class="role-item">Writers</div>
-        <div class="role-item">Directors</div>
-        <div class="role-item">Producers</div>
-        <div class="role-item" style="grid-column:span 2;justify-content:center;">Anyone with a passion for music &amp; theatre</div>
+    <div>
+      <div class="ac-roles-grid">
+        <div class="ac-role">Actors</div>
+        <div class="ac-role">Singers</div>
+        <div class="ac-role">Musicians</div>
+        <div class="ac-role">Dancers</div>
+        <div class="ac-role">Gaffers</div>
+        <div class="ac-role">Event Planners</div>
+        <div class="ac-role">Graphic Designers</div>
+        <div class="ac-role">Production Crew</div>
+        <div class="ac-role">Technical Crew</div>
+        <div class="ac-role">Writers</div>
+        <div class="ac-role">Directors</div>
+        <div class="ac-role">Producers</div>
+        <div class="ac-role full">Anyone with a passion for music &amp; theatre</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     UPCOMING MEETINGS — future-ready
-     To activate: replace placeholder cards
-     with .meeting-card divs (see structure below)
-════════════════════════════════════════ -->
-<section class="upcoming" id="meetings">
-  <div class="upcoming-header">
-    <div class="reveal">
-      <span class="section-label" style="margin-bottom:0.8rem;">Upcoming Meetings</span>
-      <h2>Academy Calendar</h2>
+<!-- ════════════ UPCOMING MEETINGS ════════════ -->
+<section class="ac-section" id="meetings">
+  <div class="ac-meetings-top">
+    <div>
+      <span class="ac-section-label">Upcoming Meetings</span>
+      <h2 class="ac-section-h2">Academy Calendar</h2>
     </div>
-    <a href="#join" class="btn-ghost reveal">Join to Attend</a>
+    <a href="#join" class="btn-ghost">Join to Attend</a>
   </div>
-  <div class="upcoming-grid">
-    <!-- Placeholder — replace with real meeting cards when dates are set -->
-    <div class="upcoming-card-placeholder reveal">
-      <div class="placeholder-icon">
+  <div class="ac-placeholder-grid">
+    <div class="ac-placeholder-card">
+      <div class="ac-placeholder-icon">
         <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       </div>
       <p>Academy meeting dates will appear here once scheduled. Members will be notified in advance.</p>
     </div>
-    <div class="upcoming-card-placeholder reveal">
-      <div class="placeholder-icon">
+    <div class="ac-placeholder-card">
+      <div class="ac-placeholder-icon">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       </div>
       <p>Monthly training sessions, rehearsals, and community events — calendar coming soon.</p>
     </div>
-    <div class="upcoming-card-placeholder reveal">
-      <div class="placeholder-icon">
+    <div class="ac-placeholder-card">
+      <div class="ac-placeholder-icon">
         <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
       </div>
       <p>Networking and mentorship sessions scheduled monthly. Join the Academy to stay updated.</p>
     </div>
   </div>
-  <!--
-    FUTURE: Replace placeholder cards with:
-    <div class="upcoming-card">
-      <div class="meeting-date-badge">
-        <span class="meeting-date-day">15</span>
-        <span class="meeting-date-month">Aug</span>
-      </div>
-      <div class="meeting-title">Academy Meeting — Training Session</div>
-      <div class="meeting-meta">7:00 PM · Online via Zoom</div>
-      <p style="font-size:0.8rem;color:var(--grey);line-height:1.7;">Monthly training covering script writing and music performance.</p>
-    </div>
-  -->
 </section>
 
-<!-- ══════════════════════════════════════
-     TESTIMONIALS — future-ready
-     To activate: replace placeholder cards
-     with real testimonial content
-════════════════════════════════════════ -->
-<section class="academy-testimonials" id="testimonials">
-  <span class="section-label reveal" style="margin-bottom:0.8rem;">Member Voices</span>
-  <h2 class="reveal">What Members<br><em style="font-style:italic;color:var(--gold);">Are Saying</em></h2>
-  <div class="testimonials-placeholder">
-    <div class="testimonial-placeholder-card reveal">
+<!-- ════════════ TESTIMONIALS ════════════ -->
+<section class="ac-section dark" id="testimonials">
+  <span class="ac-section-label">Member Voices</span>
+  <h2 class="ac-section-h2">What Members <em>Are Saying</em></h2>
+  <p class="ac-section-p">Member testimonials will be added here once the Academy launches. Be among the first to join and share your experience.</p>
+  <div class="ac-testimonials-grid">
+    <div class="ac-testimonial-card">
       <p>Member testimonials will appear here once the Academy launches. Be one of the first to share your experience.</p>
-      <div class="t-author">Academy Member</div>
+      <div class="ac-t-author">Academy Member</div>
     </div>
-    <div class="testimonial-placeholder-card reveal">
-      <p>Testimonials from actors, singers, producers, and creatives who have been transformed through the Academy community.</p>
-      <div class="t-author">Academy Member</div>
+    <div class="ac-testimonial-card">
+      <p>Testimonials from actors, singers, producers, and creatives who have grown through the Academy community.</p>
+      <div class="ac-t-author">Academy Member</div>
     </div>
-    <div class="testimonial-placeholder-card reveal">
+    <div class="ac-testimonial-card">
       <p>Stories of growth, collaboration, and lives changed through the power of music and theatre.</p>
-      <div class="t-author">Academy Member</div>
+      <div class="ac-t-author">Academy Member</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     GALLERY — future-ready
-     To activate: replace placeholder items
-     with <img> tags
-════════════════════════════════════════ -->
-<section class="academy-gallery" id="gallery">
-  <div class="gallery-header">
-    <div class="reveal">
-      <span class="section-label" style="margin-bottom:0.6rem;">Gallery</span>
-      <h2>Academy in Action</h2>
+<!-- ════════════ GALLERY ════════════ -->
+<section style="border-bottom:1px solid var(--border);" id="gallery">
+  <div class="ac-gallery-header">
+    <div>
+      <span class="ac-section-label" style="margin-bottom:0.6rem;">Gallery</span>
+      <h2 class="ac-section-h2" style="margin-bottom:0;">Academy in Action</h2>
     </div>
-    <span style="font-size:0.75rem;color:var(--grey-dim);font-style:italic;" class="reveal">Photos from meetings and productions — coming soon</span>
+    <span class="ac-gallery-header-note">Photos from meetings and productions — replacing with Academy images when available</span>
   </div>
-  <div class="gallery-grid">
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/Fky8Bwyk/29-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/Myh7YNs4/16-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/mVn4xL5H/9-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/5gmwbJ52/34-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/3mWS1fNL/49-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/Rxtg1B9/15-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/NnW7mDdY/7-1-jpg.jpg" alt="Mastercraft Academy"></div>
-    <div class="gallery-item reveal"><img src="https://i.ibb.co/fdbjtnV6/47-jpg.jpg" alt="Mastercraft Academy"></div>
+  <div class="ac-gallery-grid">
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/Fky8Bwyk/29-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/Myh7YNs4/16-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/mVn4xL5H/9-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/5gmwbJ52/34-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/3mWS1fNL/49-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/Rxtg1B9/15-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/NnW7mDdY/7-1-jpg.jpg" alt="Mastercraft Academy"></div>
+    <div class="ac-gallery-item"><img src="https://i.ibb.co/fdbjtnV6/47-jpg.jpg" alt="Mastercraft Academy"></div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     TRAINING RESOURCES — future-ready
-════════════════════════════════════════ -->
-<section class="resources" id="resources">
-  <span class="section-label reveal" style="margin-bottom:0.8rem;">Training Resources</span>
-  <h2 class="reveal">Member Resources<br><em style="font-style:italic;color:var(--gold);">Coming Soon</em></h2>
-  <div class="resources-grid">
-    <div class="resource-card reveal">
-      <span class="resource-type">Workshop</span>
-      <div class="resource-title">Script Writing Fundamentals</div>
-      <div class="resource-coming">Resource available to members after launch</div>
+<!-- ════════════ TRAINING RESOURCES ════════════ -->
+<section class="ac-section dark" id="resources">
+  <span class="ac-section-label">Training Resources</span>
+  <h2 class="ac-section-h2">Member Resources <em>Coming Soon</em></h2>
+  <p class="ac-section-p">Members will have access to a growing library of workshops, guides, and creative tools — available exclusively through the Academy.</p>
+  <div class="ac-resources-grid">
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Workshop</span>
+      <div class="ac-resource-title">Script Writing Fundamentals</div>
+      <div class="ac-resource-note">Available to members after launch</div>
     </div>
-    <div class="resource-card reveal">
-      <span class="resource-type">Workshop</span>
-      <div class="resource-title">Music Performance Techniques</div>
-      <div class="resource-coming">Resource available to members after launch</div>
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Workshop</span>
+      <div class="ac-resource-title">Music Performance Techniques</div>
+      <div class="ac-resource-note">Available to members after launch</div>
     </div>
-    <div class="resource-card reveal">
-      <span class="resource-type">Workshop</span>
-      <div class="resource-title">Acting & Stage Presence</div>
-      <div class="resource-coming">Resource available to members after launch</div>
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Workshop</span>
+      <div class="ac-resource-title">Acting &amp; Stage Presence</div>
+      <div class="ac-resource-note">Available to members after launch</div>
     </div>
-    <div class="resource-card reveal">
-      <span class="resource-type">Guide</span>
-      <div class="resource-title">UK Global Talent Visa — Music & Theatre</div>
-      <div class="resource-coming">Exclusive member guide — coming soon</div>
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Guide</span>
+      <div class="ac-resource-title">UK Global Talent Visa — Music &amp; Theatre</div>
+      <div class="ac-resource-note">Exclusive member guide — coming soon</div>
     </div>
-    <div class="resource-card reveal">
-      <span class="resource-type">Workshop</span>
-      <div class="resource-title">Theatre Production Essentials</div>
-      <div class="resource-coming">Resource available to members after launch</div>
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Workshop</span>
+      <div class="ac-resource-title">Theatre Production Essentials</div>
+      <div class="ac-resource-note">Available to members after launch</div>
     </div>
-    <div class="resource-card reveal">
-      <span class="resource-type">Community</span>
-      <div class="resource-title">Mentorship & Accountability Pairs</div>
-      <div class="resource-coming">Matched on joining — launching soon</div>
+    <div class="ac-resource-card">
+      <span class="ac-resource-type">Community</span>
+      <div class="ac-resource-title">Mentorship &amp; Accountability Pairs</div>
+      <div class="ac-resource-note">Matched on joining — launching soon</div>
     </div>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     MEMBER LOGIN / PAYMENT PORTAL — future-ready
-════════════════════════════════════════ -->
-<section class="member-portal" id="portal">
-  <div class="portal-text reveal">
-    <span class="section-label" style="margin-bottom:0.8rem;">Member Area</span>
-    <h2>Member Login &amp;<br>Payment Portal</h2>
-    <p>A dedicated member login area and payment portal is being developed. Members will be able to manage their subscription, access exclusive resources, view upcoming meeting details, and engage with the community — all in one place.</p>
-    <p style="font-size:0.82rem;color:var(--grey-dim);">Join the Academy now to be notified when the portal launches.</p>
-    <div style="margin-top:2rem;">
+<!-- ════════════ MEMBER PORTAL ════════════ -->
+<section class="ac-section" id="portal">
+  <div class="ac-portal-inner">
+    <div>
+      <span class="ac-section-label">Member Area</span>
+      <h2 class="ac-section-h2">Member Login &amp;<br>Payment Portal</h2>
+      <p class="ac-section-p">A dedicated member login area and payment portal is being developed. Members will be able to manage their subscription, access exclusive resources, view upcoming meeting details, and engage with the community — all in one place.</p>
+      <p style="font-size:0.82rem;color:var(--grey-dim);margin-bottom:2rem;">Join the Academy now to be notified when the portal launches.</p>
       <a href="#join" class="btn-primary">Join the Academy</a>
     </div>
-  </div>
-  <div class="portal-box reveal">
-    <div class="portal-icon">
-      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    <div class="ac-portal-box">
+      <span class="ac-portal-coming">Coming Soon</span>
+      <div class="ac-portal-icon">
+        <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </div>
+      <h3>Member Login</h3>
+      <p>Access your Academy dashboard, resources, subscription management, and community updates.</p>
+      <span class="btn-ghost">Login — Coming Soon</span>
     </div>
-    <h3>Member Login</h3>
-    <p>Access your Academy dashboard, resources, subscription management, and community updates.</p>
-    <a href="#" class="btn-ghost">Login — Coming Soon</a>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════
-     FINAL CTA
-════════════════════════════════════════ -->
-<section class="academy-cta">
-  <span class="section-label reveal">Ready to Join?</span>
-  <h2 class="reveal">Step Into the<br><em>Academy.</em></h2>
-  <p class="reveal">Whether you are an actor, singer, musician, producer, writer, or simply someone passionate about music and theatre — Mastercraft Music &amp; Theatre Academy has a place for you.</p>
-  <div class="cta-btns reveal">
+<!-- ════════════ FINAL CTA ════════════ -->
+<section class="ac-cta">
+  <span class="ac-section-label" style="justify-content:center;display:block;margin-bottom:1.2rem;">Ready to Join?</span>
+  <h2>Step Into the<br><em>Academy.</em></h2>
+  <p class="ac-cta-p">Whether you are an actor, singer, musician, producer, writer, or simply someone passionate about music and theatre — Mastercraft Music &amp; Theatre Academy has a place for you.</p>
+  <div class="ac-cta-btns">
     <a href="#" class="btn-primary">Join the Academy</a>
     <a href="contact.html" class="btn-ghost">Get In Touch</a>
   </div>
-  <p style="font-size:0.72rem;color:var(--grey-dim);margin-top:1.5rem;" class="reveal">
-    Registration form link will be added shortly. <a href="contact.html" style="color:var(--gold);text-decoration:none;">Contact us</a> in the meantime to register your interest.
-  </p>
+  <p class="ac-cta-note">Registration form link will be added shortly. <a href="contact.html">Contact us</a> in the meantime to register your interest.</p>
 </section>
 
-<!-- ── FOOTER ── -->
+<!-- FOOTER -->
 <footer>
   <a href="index.html" class="footer-logo">
     <img src="https://i.ibb.co/4Zp67P6r/Mastercraft-Logo-H-white.png" alt="Mastercraft Global Ltd">
